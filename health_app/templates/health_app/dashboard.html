@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h2>Welcome, {{ request.user.username }}</h2>
+    <h3>Your Health Dashboard</h3>
+
+    <p><a href="{% url 'record_vital_signs' %}">Record New Vital Signs</a></p>
+
+    {% if vital_signs %}
+        <h3>Recent Vital Sign Records</h3>
+        <table>
+            <tr>
+                <th>Date</th>
+                <th>Systolic BP</th>
+                <th>Diastolic BP</th>
+                <th>Heart Rate</th>
+                <th>Temperature</th>
+            </tr>
+            {% for sign in vital_signs %}
+                <tr>
+                    <td>{{ sign.date }}</td>
+                    <td>{{ sign.blood_pressure_systolic }}</td>
+                    <td>{{ sign.blood_pressure_diastolic }}</td>
+                    <td>{{ sign.heart_rate }}</td>
+                    <td>{{ sign.temperature }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>No vital sign records found. <a href="{% url 'record_vital_signs' %}">Add your first record</a>!</p>
+    {% endif %}
+
+    <p><a href="{% url 'logout' %}">Logout</a></p>
+</body>
+</html>
