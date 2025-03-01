@@ -29,7 +29,8 @@ ALLOWED_HOSTS = []
 
 LOGIN_REDIRECT_URL = 'dashboard'
 LOGOUT_REDIRECT_URL = 'home'
-
+STATIC_URL = '/static/'  # Make sure this line is already in settings.py
+STATIC_ROOT = '/home/MaricaGeorge/health_app/static/'
 # Application definition
 
 INSTALLED_APPS = [
